@@ -1,4 +1,4 @@
-class URLShortenerScript
+class ShortenUrl
 
   def self.sign_up(user_name, email)
     @current_user = User.find_by_email(email)
