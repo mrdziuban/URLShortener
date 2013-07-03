@@ -75,12 +75,10 @@ class URLShortenerScript
   def self.recent_visits(short_url)
     current_time = Time.now
     ten_mins_ago = current_time - 600
+    puts ten_mins_ago
     short_url_record = ShortUrl.find_by_url(short_url)
 
-    query =
-    ""
-
-    Visit.count_by_sql(["SELECT COUNT(user_id) FROM visits WHERE short_url_id = #{short_url_record.id} AND created_at >= ? GROUP BY short_url_id ", ten_mins_ago])
+    Visit.where("short_url_id = ? AND created_at >= ?", short_url_record.id, ten_mins_ago).length
   end
 end
 
